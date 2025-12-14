@@ -6,9 +6,8 @@ Nemtsovo/Nemtsovo/config.py
 .htaccess
 passenger_wsgi.py
 
-#Media and static
+#Media
 media/
-static/
 
 .idea/
 

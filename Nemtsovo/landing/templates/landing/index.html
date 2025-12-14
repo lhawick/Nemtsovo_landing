@@ -49,6 +49,7 @@
               На
               экоферме можно увидеть
               пасущихся коз, милых поросят, ласковых овец, прекрасных лошадей и курочек!</p>
+            <span class="open-dialog-btn no-hover" dialog='about-owner-dialog'>О владельце</span>
           </div>
         </div>
         <img class="about-us__photo" src="{% static 'landing/svg/goat.svg' %}" alt="Козочка" loading="lazy">
@@ -398,10 +399,10 @@
             <a class="contacts-item__text" href='https://wa.me/79269159153'>+7 926 915-91-53</a>
           </div>
           <div class="contacts-item">
-            <img class="contacts-item__icon" src="{% static 'landing/svg/instagram-icon.svg' %}" loading="lazy"
-                 alt="instagram">
+            <img class="contacts-item__icon" src="{% static 'landing/svg/telegram-icon.svg' %}" loading="lazy"
+                 alt="telegram">
             <a class="contacts-item__text"
-               href='https://instagram.com/_u/nemtsovo_life_ecofarm/'>@nemtsovo_life_ecofarm</a>
+               href='https://t.me/ecoferma_nemtsovo'>@ecoferma_nemtsovo</a>
           </div>
           <div class="contacts-item">
             <img class="contacts-item__icon" src="{% static 'landing/svg/address-icon.svg' %}" loading="lazy"
@@ -416,9 +417,63 @@
         </div>
       </div>
     </section>
+
+    <!-- Карта -->
+    <section class="map" id="map">
+      <div class="map__container container">
+        <h2 class="map__title title">Карта территории 🗺️</h2>
+        <div class="map__content">
+          <a data-fancybox="Карта" data-src="{% static "landing/img/map.jpg" %}">
+            <img src="{% static "landing/img/map-small.jpg" %}" alt="Карта" loading="lazy">
+            <p>Нажмите, чтобы приблизить&nbsp;🔎</p>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <div class="dialogs">
+
+    <dialog class="dialog" id="about-owner-dialog">
+      <header class="dialog__header">
+        <h3 class="dialog__title">О владельце</h3>
+        <button class="close-dialog-btn">❌</button>
+      </header>
+      <div class="dialog__content">
+        <p>Здравствуйте, дорогие друзья!</p>
+        <p>Рада приветствовать вас на нашем сайте!&nbsp;❤️</p>
+        <br/>
+        <p>Давайте познакомимся ближе?🤗</p>
+        <br/>
+        <p>
+          Меня зовут Елена Шатохина,  являюсь главой крестьянско-фермерского хозяйства Шатохина Е.Э., 
+          или как всем привычней слышать Семейная экоферма в Немцово&nbsp;👋
+        </p>
+        <div class="img-container">
+          <img src="{% static 'landing/img/owner.jpg' %}" alt="Елена" />
+        </div>
+        <p>
+          Немного расскажу о себе.
+          По образованию я психолог, зоотехник, фермер.
+          Эти грани помогают мне создавать пространство, где переплетаются любовь к природе, 
+          забота о животных и понимание человеческой души 🤍
+        </p>
+        <br/>
+        <p>
+          Хочу создать (и надеюсь уже создаю&nbsp;😊) свой мир, где будет царить счастье, гармония с природой, 
+          с животными и очень важное с самим собой.
+        </p>
+        <br/>
+        <p>
+          Чтобы каждый гость, попадая в этот мир, чувствовал заботу, тепло, чувствовал нашу энергетику и получал 
+          знания о себе, через нас, через общение с животными, наполнялся силой природы и находил внутренний баланс.
+        </p>
+        <p>Чтобы напитанные этим позитивным состоянием могли двигаться дальше и свершать великие дела!&nbsp;🔥</p>
+        <br/>
+        <p>До встречи на Семейной экоферме в Немцово!&nbsp;❤️</p>
+      </div>
+    </dialog>
+
     {% if additional_info %}
       {% for info in additional_info %}
         <dialog class="dialog" id="{{ info.get_unique_name }}">

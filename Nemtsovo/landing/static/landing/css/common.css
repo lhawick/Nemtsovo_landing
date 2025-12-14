@@ -1,0 +1,49 @@
+@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat"), url("../fonts/Montserrat/Montserrat-VariableFont_wght.ttf");
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Vulgat";
+  src: local("Vulgat"), url("../fonts/Vulgat/Vulgat-Bold.ttf");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat";
+  font-weight: 400;
+}
+
+body {
+  background-color: #473225;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease-out;
+  color: #fff;
+}
+a:hover {
+  border-color: #fff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 5vw;
+}
+
+.font-shadow {
+  text-shadow: #000 0px 0px 10px;
+}/*# sourceMappingURL=common.css.map */
