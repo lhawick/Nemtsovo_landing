@@ -42,7 +42,6 @@ function toggleDialogs(oldDialog, newDialog) {
 
 dialogs.forEach(dialog => {
     const closeBtn = dialog.querySelector('.close-dialog-btn');
-    const content = dialog.querySelector('.dialog__content');
     if (!closeBtn) return
 
     closeBtn.onclick = evt => closeDialog(dialog);

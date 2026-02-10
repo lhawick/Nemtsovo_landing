@@ -165,11 +165,6 @@ class Attachment(models.Model):
         verbose_name_plural = verbose_name
         ordering = ['order']
 
-
-# class BookingBtnTextChoice(models.TextChoices):
-#     BOOKING = "Забронировать", "Забронировать"
-#     APPOINTMENT = "Записаться", "Записаться"
-
 BOOKING_BTN_TEXT = 'Забронировать'
 APPOINTMENT_BTN_TEXT = "Записаться"
 
