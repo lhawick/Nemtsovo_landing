@@ -51,10 +51,6 @@ class Booking(models.Model):
         (APPROVED, 'Бронь ✔️'),
         (CANCELED, 'Отменено ❌')
     ]
-    # class BookingStatus(models.TextChoices):
-    #     ACTIVE = 'a', 'Активно 🟢'
-    #     APPROVED = 'b', 'Бронь ✔️'
-    #     CANCELED = 'c', 'Отменено ❌'
 
     status = models.CharField('Статус', choices=BOOKING_STATUS, default=ACTIVE, max_length=20)
     manager_comment = models.TextField('Комментарий', blank=True, null=True,
@@ -164,11 +160,6 @@ class Attachment(models.Model):
         verbose_name = 'Фото/Видео'
         verbose_name_plural = verbose_name
         ordering = ['order']
-
-
-# class BookingBtnTextChoice(models.TextChoices):
-#     BOOKING = "Забронировать", "Забронировать"
-#     APPOINTMENT = "Записаться", "Записаться"
 
 BOOKING_BTN_TEXT = 'Забронировать'
 APPOINTMENT_BTN_TEXT = "Записаться"

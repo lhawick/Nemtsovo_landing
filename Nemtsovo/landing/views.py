@@ -1,5 +1,6 @@
 import json
 from datetime import datetime, timedelta
+from django.urls import reverse
 from django.utils import timezone
 
 from django.core.paginator import Paginator
@@ -8,6 +9,9 @@ from django.shortcuts import render
 from landing.models import House, AdditionalInfo, WellnessTreatment, Action, OurProduct, Event, News, Booking, OurPet, \
     ErrorLog
 import traceback
+from . import telegram_bot
+from django.utils.timezone import localtime
+from django.conf import settings
 
 
 def index(request):
@@ -101,6 +105,9 @@ def add_booking(request):
             user_comment=form_data['comment']
         )
         new_booking.save()
+
+        send_msg_to_telegram(new_booking, request)
+        
     except Exception as e:
         err_message = "An error occured while saving new booking: " + str(e)
         add_log_to_db(err_message, traceback.extract_stack(), form_data)
@@ -109,6 +116,20 @@ def add_booking(request):
 
     return HttpResponse(status=201)
 
+
+def send_msg_to_telegram(new_booking: Booking, request) -> None:
+    admin_url = reverse(
+        f'admin:{new_booking._meta.app_label}_{new_booking._meta.model_name}_change', 
+        args=[new_booking.pk])
+
+    telegram_bot.send_message(
+        chat_id=settings.TELEGRAM_BOT_USER, 
+        text=new_booking_tg_msg_template.format(
+            title=new_booking.booking_identifier.name,
+            desired_dates=new_booking.desired_dates,
+            created_at=localtime(new_booking.date_create).strftime("%d.%m.%Y %H:%M")
+        ),
+        inline_keyboard=[[{"text": "Посмотреть", "url": request.build_absolute_uri(admin_url)}]])
 
 def get_booked_days(request, booking_identifier_id):
     if not booking_identifier_id or booking_identifier_id == 0:
@@ -219,3 +240,9 @@ def add_log_to_db(message, stack_trace=None, additional=None):
         error_log.save()
     except Exception as e:
         print("Failed to save ErrorLog: " + str(e))
+
+new_booking_tg_msg_template = (
+    "<b>Новая заявка на бронирование {title}</b>\n\n"
+    "<b>Желаемые даты:</b> {desired_dates}\n"
+    "<b>Дата создания:</b> {created_at}\n"
+)
