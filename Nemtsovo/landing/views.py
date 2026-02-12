@@ -121,11 +121,15 @@ def send_msg_to_telegram(new_booking: Booking, request) -> None:
     admin_url = reverse(
         f'admin:{new_booking._meta.app_label}_{new_booking._meta.model_name}_change', 
         args=[new_booking.pk])
+    
+    title = new_booking.booking_identifier.name
+    if new_booking.is_dayly:
+        title += ' (посуточно)'
 
     telegram_bot.send_message(
         chat_id=settings.TELEGRAM_BOT_USER, 
         text=new_booking_tg_msg_template.format(
-            title=new_booking.booking_identifier.name,
+            title=title,
             desired_dates=new_booking.desired_dates,
             created_at=localtime(new_booking.date_create).strftime("%d.%m.%Y %H:%M")
         ),
