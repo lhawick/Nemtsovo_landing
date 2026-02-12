@@ -106,7 +106,10 @@ def add_booking(request):
         )
         new_booking.save()
 
-        send_msg_to_telegram(new_booking, request)
+        try:
+            send_msg_to_telegram(new_booking, request)
+        except Exception as e:
+            add_log_to_db("Failed to notify to telegram: " + str(e))
         
     except Exception as e:
         err_message = "An error occured while saving new booking: " + str(e)
