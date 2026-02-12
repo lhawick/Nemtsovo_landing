@@ -168,6 +168,12 @@ li {
     position: absolute;
     transition: opacity .3s ease;
     z-index: 12;
+    right: 2vw;
+    top: 40%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 
     &__link {
       img {
@@ -190,13 +196,6 @@ li {
       transform: translateX(-50%);
       display: flex;
     }
-
-    right: 2vw;
-    top: 40%;
-
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
   }
 
   .main-header__down-icon {
@@ -395,14 +394,13 @@ li {
   height: max-content;
   max-height: 600px;
   aspect-ratio: 7 / 10;
+  background-color: common.$white;
+  border-radius: 50px;
+  overflow: hidden;
 
   @media (max-width: $slider-transform-size) {
     width: 89vw;
   }
-
-  background-color: common.$white;
-  border-radius: 50px;
-  overflow: hidden;
 
   .f-carousel {
     &__slide {
@@ -467,14 +465,14 @@ li {
 
   &__title {
     font-family: "Vulgat";
+    font-weight: bold;
+    line-height: 0.8em;
+
     @include mixins.adaptiv-font(28, 36);
 
     @media (max-width: 359px) {
       font-size: 20px;
     }
-
-    font-weight: bold;
-    line-height: 0.8em;
   }
 
   &__price {
@@ -810,6 +808,8 @@ li {
       .event {
         &__title {
           font-weight: 500;
+          border: none;
+          display: block;
         }
 
         &__date-time {
@@ -843,6 +843,8 @@ li {
     .news-item {
       &__title {
         font-weight: 500;
+        border: none;
+        display: block;
       }
 
       &__date-time {

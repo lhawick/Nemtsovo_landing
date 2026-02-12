@@ -5,7 +5,7 @@ from django.utils import timezone
 
 from django.core.paginator import Paginator
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseServerError, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from landing.models import House, AdditionalInfo, WellnessTreatment, Action, OurProduct, Event, News, Booking, OurPet, \
     ErrorLog
 import traceback
@@ -51,12 +51,23 @@ def events(request):
         'past_events': past_events[:10]
     })
 
-
+NEWS_PAGE_SIZE = 5
 def news(request):
-    all_news = News.objects.all()
-    paginator = Paginator(all_news, 5)
-
+    all_news = News.objects.all().order_by("-date")
+    paginator = Paginator(all_news, NEWS_PAGE_SIZE)
     page_number = request.GET.get('page') or 1
+
+    news_item_id = request.GET.get("news_item")
+    if news_item_id:
+        try:
+            news_item = all_news.get(pk=news_item_id)
+            news_item_index = all_news.filter(date__gt=news_item.date).count()
+            page_number = news_item_index // NEWS_PAGE_SIZE + 1
+
+            return redirect(reverse("news") + f"?page={page_number}#news_{news_item.pk}")
+        except Exception:
+            pass
+
     news_page = paginator.get_page(page_number)
 
     return render(

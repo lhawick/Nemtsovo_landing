@@ -1,3 +1,5 @@
+from django.urls import reverse
+from django.utils.html import format_html
 from .models import *
 from django.contrib.contenttypes.admin import GenericTabularInline
 from django.forms import TextInput
@@ -73,6 +75,17 @@ class EventAdmin(SortableAdminBase, admin.ModelAdmin):
     save_on_top = True
     search_fields = ("title", "description")
 
+    readonly_fields=["public_link"]
+
+    def public_link(self, obj):
+        if not obj.pk:
+            return "Сохраните объект, чтобы увидеть ссылку"
+
+        url = reverse("events") + f"#event_{obj.pk}"
+        return format_html('<a href="{}" target="_blank">{}</a>', url, url)
+    
+    public_link.short_description = "Ссылка на мероприятие"
+
 
 @admin.register(News)
 class NewsAdmin(SortableAdminBase, admin.ModelAdmin):
@@ -82,6 +95,17 @@ class NewsAdmin(SortableAdminBase, admin.ModelAdmin):
     ordering = ['-date']
     save_on_top = True
     search_fields = ("title", "description")
+
+    readonly_fields=["public_link"]
+
+    def public_link(self, obj):
+        if not obj.pk:
+            return "Сохраните объект, чтобы увидеть ссылку"
+
+        url = reverse("news") + f"?news_item={obj.pk}"
+        return format_html('<a href="{}" target="_blank">{}</a>', url, url)
+    
+    public_link.short_description = "Ссылка на новость"
 
 
 @admin.action(description="Подтвердить выбранные Заявки на бронирование")

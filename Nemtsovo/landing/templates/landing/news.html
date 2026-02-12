@@ -10,8 +10,8 @@
       <h1 class="main-title">Новости</h1>
       <section class="news">
         {% for news_item in news %}
-          <article class="news-item">
-            <p class="news-item__title small-title">{{ news_item.title }}</p>
+          <article class="news-item" id='news_{{news_item.pk}}'>
+            <a class="news-item__title small-title" href='#news_{{news_item.pk}}'>{{ news_item.title }}</a>
             <p class="news-item__date-time description">{{ news_item.date }}</p>
             <p class="news-item__description description">{{ news_item.description|linebreaksbr }}</p>
             {% if news_item.media.exists %}

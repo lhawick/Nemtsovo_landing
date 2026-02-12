@@ -14,8 +14,8 @@
         <h2 class="events__title">Предстоящие</h2>
         <div class="events__list">
           {% for event in future_events %}
-            <article class="event">
-              <p class="event__title small-title">{{ event.title }}</p>
+            <article class="event" id='event_{{ event.pk }}'>
+              <a class="event__title small-title" href='#event_{{event.pk}}'>{{ event.title }}</a>
               <p class="event__date-time description">{{ event.date }}</p>
               <p class="event__description description">{{ event.description|linebreaksbr }}</p>
               {% if event.media.exists %}
@@ -47,8 +47,8 @@
           <h2 class="events__title">Прошедшие</h2>
           <div class="events__list">
             {% for event in past_events %}
-              <article class="event">
-                <p class="event__title small-title">{{ event.title }}</p>
+              <article class="event" id='event_{{ event.pk }}'>
+                <a class="event__title small-title" href='#event_{{ event.pk }}'>{{ event.title }}</a>
                 <p class="event__date-time description">{{ event.date }}</p>
                 <p class="event__description description">{{ event.description|linebreaksbr }}</p>
                 {% if event.media.exists %}
