@@ -16,6 +16,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
+TELEGRAM_BOT_TOKEN = os.getenv("TG_BOT_TOKEN")
+TELEGRAM_BOT_USER = os.getenv("TG_BOT_USER")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 IS_PROD = not not os.getenv("IS_PROD")
