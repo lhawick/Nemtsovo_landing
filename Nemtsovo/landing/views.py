@@ -113,7 +113,7 @@ def add_booking(request):
         
     except Exception as e:
         err_message = "An error occured while saving new booking: " + str(e)
-        add_log_to_db(err_message, traceback.extract_stack(), form_data)
+        add_log_to_db(err_message, traceback.format_exc(), form_data)
 
         return HttpResponseServerError(err_message)
 
@@ -182,7 +182,7 @@ def get_booked_days(request, booking_identifier_id):
                         booked_dates.add(date)
     except Exception as e:
         message = "failed to get booked days: " + str(e)
-        add_log_to_db(message, traceback.extract_stack(), request.GET)
+        add_log_to_db(message, traceback.format_exc(), request.GET)
 
     booked_dates_str = set([get_string_from_date(date) for date in booked_dates])
 
