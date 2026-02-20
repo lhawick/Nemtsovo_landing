@@ -81,7 +81,7 @@ class EventAdmin(SortableAdminBase, admin.ModelAdmin):
         if not obj.pk:
             return "Сохраните объект, чтобы увидеть ссылку"
 
-        url = reverse("events") + f"#event_{obj.pk}"
+        url = "https://nemtsovo-ecofarm.ru" + reverse("events") + f"#event_{obj.pk}"
         return format_html('<a href="{}" target="_blank">{}</a>', url, url)
     
     public_link.short_description = "Ссылка на мероприятие"
@@ -102,7 +102,7 @@ class NewsAdmin(SortableAdminBase, admin.ModelAdmin):
         if not obj.pk:
             return "Сохраните объект, чтобы увидеть ссылку"
 
-        url = reverse("news") + f"?news_item={obj.pk}"
+        url = "https://nemtsovo-ecofarm.ru" + reverse("news") + f"?news_item={obj.pk}"
         return format_html('<a href="{}" target="_blank">{}</a>', url, url)
     
     public_link.short_description = "Ссылка на новость"
