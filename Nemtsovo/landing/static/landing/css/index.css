@@ -1049,6 +1049,7 @@ li {
 }
 .promo-banner__image {
   max-height: 100dvh;
+  max-width: 100%;
   z-index: 1001;
   -o-object-fit: contain;
      object-fit: contain;

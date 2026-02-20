@@ -1045,6 +1045,7 @@ li {
 
   &__image {
     max-height: 100dvh;
+    max-width: 100%;
     z-index: 1001;
     object-fit: contain;
   }
