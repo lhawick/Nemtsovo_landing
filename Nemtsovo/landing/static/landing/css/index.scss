@@ -85,7 +85,9 @@ li {
     align-items: center;
     gap: min(2vw, 30px);
     @include mixins.adaptiv-font(16, 20);
-    transition: display .3s ease, background-color .3s ease;
+    transition:
+      display 0.3s ease,
+      background-color 0.3s ease;
 
     // адаптируем меню под телефоны
     @media (max-width: #{common.$hideNavSize + px}) {
@@ -166,7 +168,7 @@ li {
 
   .side-social-links {
     position: absolute;
-    transition: opacity .3s ease;
+    transition: opacity 0.3s ease;
     z-index: 12;
     right: 2vw;
     top: 40%;
@@ -243,7 +245,9 @@ li {
 
   width: max-content;
   cursor: pointer;
-  transition: background-color .3s ease-out, border-color .3s ease-out;
+  transition:
+    background-color 0.3s ease-out,
+    border-color 0.3s ease-out;
   border: 2px solid common.$green;
 
   &:hover {
@@ -326,7 +330,8 @@ li {
     vertical-align: center;
     gap: 2%;
 
-    .events, .news {
+    .events,
+    .news {
       flex: 1 0 fit-content;
       color: common.$white;
 
@@ -406,7 +411,8 @@ li {
     &__slide {
       max-width: 420px;
 
-      a img, a video {
+      a img,
+      a video {
         width: 100%;
         max-width: 420px;
         height: 100%;
@@ -488,7 +494,7 @@ li {
 
     &.free {
       &::before {
-        content: ''
+        content: "";
       }
     }
 
@@ -609,7 +615,8 @@ li {
   align-items: center;
   height: 300px;
 
-  &__title, &__add-message {
+  &__title,
+  &__add-message {
     text-align: center;
     color: common.$black;
   }
@@ -617,7 +624,6 @@ li {
   &__btn {
     margin-top: 2em;
   }
-
 }
 
 .actions-list {
@@ -744,7 +750,8 @@ li {
     border: none;
     cursor: pointer;
 
-    img, video {
+    img,
+    video {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -896,10 +903,10 @@ li {
       white-space: nowrap;
     }
 
-    input[type='text'],
-    input[type='tel'],
-    input[type='number'],
-    input[type='time'],
+    input[type="text"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="time"],
     textarea,
     #date {
       margin-top: 0.5em;
@@ -907,7 +914,7 @@ li {
       @include mixins.adaptiv-font(14, 16);
     }
 
-    input[type='checkbox'] {
+    input[type="checkbox"] {
       width: 1.2em;
       height: 1.2em;
     }
@@ -937,7 +944,6 @@ li {
 }
 
 .custom-pagination-page {
-
   &.is-active {
     background: common.$green !important;
   }
@@ -949,11 +955,12 @@ li {
 
 .gallery-item-slide {
   max-height: 320px;
-  max-width: 320px!important;
+  max-width: 320px !important;
   border: none;
   cursor: pointer;
 
-  a > img, a > video {
+  a > img,
+  a > video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -1009,8 +1016,49 @@ li {
       }
 
       &:hover {
-        border-bottom: 2px solid transparent!important;
+        border-bottom: 2px solid transparent !important;
       }
     }
+  }
+}
+
+.promo-banner {
+  position: fixed;
+  width: 100dvw;
+  height: 100dvh;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  &__inner {
+    position: relative;
+    max-width: 100%;
+  }
+
+  &__link {
+    display: block;
+    cursor: pointer;
+  }
+
+  &__image {
+    max-height: 100dvh;
+    z-index: 1001;
+    object-fit: contain;
+  }
+
+  &__close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    outline: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1010;
+    padding: 0.5vw;
   }
 }

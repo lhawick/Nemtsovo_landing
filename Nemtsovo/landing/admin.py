@@ -194,6 +194,22 @@ class ErrorLogAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return False
 
+@admin.register(PromoBanner)
+class PromoBannerAdmin(admin.ModelAdmin):
+    readonly_fields = ["image_preview"]
+    fields = ("name", "image_preview", "image", "start_at", "end_at", "is_active", "link")
+    list_display = ("image_preview", "name", "start_at", "end_at", 'is_active')
+
+    def image_preview(self, obj):
+        if not obj or not obj.image:
+            return "Нет изображения"
+        return format_html(
+            '<img src="{}" style="max-height: 150px; max-width: 100%;" />',
+            obj.image.url,
+        )
+    
+    image_preview.short_description = 'Предпросмотр'
+
 
 admin.site.register(BookingIdentifier)
 admin.site.register(Period)

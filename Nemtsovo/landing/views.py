@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.core.paginator import Paginator
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseServerError, HttpResponse
 from django.shortcuts import redirect, render
-from landing.models import House, AdditionalInfo, WellnessTreatment, Action, OurProduct, Event, News, Booking, OurPet, \
+from landing.models import House, AdditionalInfo, PromoBanner, WellnessTreatment, Action, OurProduct, Event, News, Booking, OurPet, \
     ErrorLog
 import traceback
 from . import telegram_bot
@@ -264,3 +264,15 @@ new_booking_tg_msg_template = (
     "<b>Желаемые даты:</b> {desired_dates}\n"
     "<b>Дата создания:</b> {created_at}\n"
 )
+
+def get_promo_banner(request):
+    banner = PromoBanner.get_current_banner()
+    if not banner:
+        return JsonResponse({"Banner": None})
+    
+    return JsonResponse({
+        "banner": {
+            "imageUrl": banner.image.url,
+            "link": banner.link
+        }
+    })

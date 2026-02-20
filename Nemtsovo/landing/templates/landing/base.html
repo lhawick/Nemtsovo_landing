@@ -2,76 +2,91 @@
 
 <!DOCTYPE html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Добро пожаловать на нашу семейную &quot;Экоферму в Немцово&quot;. У нас вы найдете Комфортный отдых в окружении природы и прекрасных животных, а так же незабываемые эмоции и максимальное расслабление!" />
+    <meta name="keywords" content="экоферма, экоферма немцово, немцово, домодедово, натуральные продукты, отдых на природе, аренда домиков, животные, русская баня, семейная ферма" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-        content="Добро пожаловать на нашу семейную &quot;Экоферму в Немцово&quot;. У нас вы найдете Комфортный отдых в окружении природы и прекрасных животных, а так же незабываемые эмоции и максимальное расслабление!">
-  <meta name="keywords"
-        content="экоферма, экоферма немцово, немцово, домодедово, натуральные продукты, отдых на природе, аренда домиков, животные, русская баня, семейная ферма">
+    <link rel="stylesheet" href="{% static 'landing/css/index.css' %}" />
+    <link rel="icon" type="image/x-icon" href="{% static 'landing/favicon.png' %}" />
 
-  <link rel="stylesheet" href="{% static 'landing/css/index.css' %}">
-  <link rel="icon" type="image/x-icon" href="{% static 'landing/favicon.png' %}">
+    <!-- Fancybox -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/carousel/carousel.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 
-  <!-- Fancybox -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/carousel/carousel.css"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+    <!-- Splide -->
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/themes/splide-skyblue.min.css" rel="stylesheet" />
 
-  <!-- Splide -->
-  <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/themes/splide-skyblue.min.css"
-        rel="stylesheet">
+    <!-- air datepicker -->
+    <link rel="stylesheet" href="{% static 'landing/js/packages/air-datepicker/dist/air-datepicker.css' %}" />
 
-  <!-- air datepicker -->
-  <link rel="stylesheet" href="{% static 'landing/js/packages/air-datepicker/dist/air-datepicker.css' %}">
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+  </head>
 
-  <title>{% block title %}{% endblock %}</title>
-</head>
+  <body>
+    <header class="main-header">
+      <div class="main-header__container container">
+        <a href="{% url 'index' %}" class="main-header__logo"><img src="{% static 'landing/svg/logo.svg' %}" alt="Логотип" /></a>
+        <nav class="header-nav-links">
+          <a href="{% url 'events' %}" class="header-nav-links__link font-shadow">Мероприятия</a>
+          <a href="{% url 'news' %}" class="header-nav-links__link font-shadow">Новости</a>
+          <a href="{% url 'our_products' %}" class="header-nav-links__link font-shadow">Продукция</a>
+          <a href="{% if request.path == '/' %}
+              #contacts
+            {% else %}
+              {% url 'index' %}
+              #contacts
+            {% endif %}"
+            class="header-nav-links__link font-shadow">
+            Контакты
+          </a>
+          <a href="https://t.me/Nemtsovo_life_ecofarm" class="booking-btn">Напишите Нам</a>
+        </nav>
+        <img id="menu-btn" src="{% static 'landing/svg/burger-menu-icon.svg' %}" />
+      </div>
+    </header>
 
-<body>
-<header class="main-header">
-  <div class="main-header__container container">
-    <a href="{% url 'index' %}" class="main-header__logo">
-      <img src="{% static 'landing/svg/logo.svg' %}" alt="Логотип">
-    </a>
-    <nav class="header-nav-links">
-      <a href="{% url 'events' %}" class="header-nav-links__link font-shadow">Мероприятия</a>
-      <a href="{% url 'news' %}" class="header-nav-links__link font-shadow">Новости</a>
-      <a href="{% url 'our_products' %}" class="header-nav-links__link font-shadow">Продукция</a>
-      <a href="{% if request.path == '/' %}#contacts{% else %}{% url 'index' %}#contacts{% endif %}"
-         class="header-nav-links__link font-shadow">Контакты</a>
-      <a href="https://t.me/Nemtsovo_life_ecofarm" class="booking-btn">Напишите Нам</a>
-    </nav>
-    <img id="menu-btn" src="{% static 'landing/svg/burger-menu-icon.svg' %}">
-  </div>
-</header>
+    {% block content %}
 
-{% block content %}
+    {% endblock %}
 
-{% endblock %}
+    <footer class="main-footer">
+      <div class="main-footer__container container">
+        <a class="main-footer__btn booking-btn" href="https://t.me/Nemtsovo_life_ecofarm">Написать нам</a>
+        <img class="main-footer__logo" src="{% static 'landing/svg/logo.svg' %}" alt="Логотип" loading="lazy" />
+        <iframe src="https://yandex.ru/sprav/widget/rating-badge/89743823636?type=alt" width="150" height="50" frameborder="0"></iframe>
+      </div>
+    </footer>
 
-<footer class="main-footer">
-  <div class="main-footer__container container">
-    <a class="main-footer__btn booking-btn" href="https://t.me/Nemtsovo_life_ecofarm">Написать нам</a>
-    <img class="main-footer__logo" src="{% static 'landing/svg/logo.svg' %}" alt="Логотип" loading="lazy">
-    <iframe src="https://yandex.ru/sprav/widget/rating-badge/89743823636?type=alt" width="150" height="50" frameborder="0"></iframe>
-  </div>
-</footer>
+    <div class="promo-banner" id='promo-banner'>
+      <div class="promo-banner__inner">
+        <a href="#" class="promo-banner__link">
+          <img class="promo-banner__image" src="{% static 'landing/img/owner.jpg' %}" />
+        </a>
+        <button class="promo-banner__close-btn">❌</button>
+      </div>
+    </div>
 
-<!-- Fancybox -->
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/carousel/carousel.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script src="{% static 'landing/js/banner.js' %}"></script>
 
-<!-- splide -->
-<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <!-- Fancybox -->
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/carousel/carousel.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 
-<!-- air datepicker -->
-<script src="{% static 'landing/js/packages/air-datepicker/dist/air-datepicker.js' %}"></script>
+    <!-- splide -->
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
 
-<script src="{% static 'landing/js/main.js' %}"></script>
+    <!-- air datepicker -->
+    <script src="{% static 'landing/js/packages/air-datepicker/dist/air-datepicker.js' %}"></script>
 
-{% block javascript %}
+    <script src="{% static 'landing/js/main.js' %}"></script>
 
-{% endblock %}
-</body>
+    {% block javascript %}
+
+    {% endblock %}
+  </body>
 </html>

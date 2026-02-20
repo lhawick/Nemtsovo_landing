@@ -444,3 +444,45 @@ class ErrorLog(models.Model):
         verbose_name = 'Ошибка'
         verbose_name_plural = 'Ошибки'
         ordering = ['is_solved', '-date']
+
+class PromoBanner(models.Model):
+    name = models.CharField("Название баннера", max_length=100)
+    image=models.ImageField(
+        "Изображение",
+        upload_to='landing/'
+    )
+    start_at = models.DateField("Дата начала показа")
+    end_at = models.DateField("Дата окончания показа (включительно)")
+    is_active = models.BooleanField("Включён?", default=True)
+    link = models.CharField("Ссылка", max_length=255, blank=True)
+
+    class Meta:
+        ordering = ['-is_active', '-start_at', 'end_at']
+        verbose_name = 'Промо-баннер'
+        verbose_name_plural = 'Промо-баннеры'
+
+    def __str__(self):
+        return "Баннер " + self.name
+    
+    @property
+    def is_in_date_range(self) -> bool:
+        """
+        Удобное свойство: активен ли баннер по датам сейчас,
+        без учёта is_active.
+        """
+        now = timezone.now()
+        return self.start_at <= now <= self.end_at
+    
+    @classmethod
+    def get_current_banner(cls) -> "PromoBanner | None":
+        """
+        Вернуть один текущий баннер или None.
+        Логику выбора можно менять по вкусу (приоритет, случайный и т.п.).
+        """
+        now = timezone.localtime(timezone.now())
+        qs = (
+            cls.objects
+            .filter(is_active=True, start_at__lte=now, end_at__gte=now)
+            .order_by("-start_at")
+        )
+        return qs.first()
